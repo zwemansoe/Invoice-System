@@ -24,11 +24,11 @@ Route::get('/invoice/','InvoiceController@create');
 // post 
 Route::post('/invoice/','InvoiceController@store');
 // put
-Route::post('/invoice/{id}/update','InvoiceController@update');
+Route::put('/invoice/{id}/update','InvoiceController@update');
 // edit 
 Route::get('/invoice/{id}/update','InvoiceController@edit');
 // delete
-Route::get('/invoice/{id}','InvoiceController@destroy');
+Route::delete('/invoice/{id}','InvoiceController@destroy');
 
 // PDF 
 Route::get('/invoice/{id}/pdf','InvoiceController@pdf');

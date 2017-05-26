@@ -37,10 +37,10 @@
            var tr='<tr class="info">'+
                 '<input type="hidden" value='+n+'>'+  
                 '<td><input name="itemname[]" class="form-control input is-success itemnamebutton" type="text"></td>'+
-                '<td><input name="item[]" class="form-control input is-success itembutton" type="text"></td>'+
+                '<td><input  name="quantity[]" class="form-control input is-success itembutton" type="text"></td>'+
                 '<td><input name="price[]" class="form-control input is-success pricebutton" type="text"></td>'+
-                '<td><input disabled class="form-control input is-success totalbutton"></p></td>'+
-                '<td><i id="trash" class="fa fa-trash-o" aria-hidden="true"></i></td>'+
+                '<td><input name="item_total[]" class="form-control input is-success totalbutton"></p></td>'+
+                '<td><i id="trashbutton" class="fa fa-trash-o" aria-hidden="true"></i></td>'+
                 '<tr>';
           $('.detailbutton').append(tr);   
        };

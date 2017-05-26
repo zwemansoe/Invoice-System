@@ -26,7 +26,9 @@ class request_form_validate extends FormRequest
         
         return [
             'invoicename'=>'required',           
-           
+            'subtotal'=>'required',
+            'tax'=>'required|numeric|min:1',
+            'total'=>'required|numeric|min:1'
         ];
     }
 }

@@ -30,18 +30,18 @@
                             <tbody class="detail">                            
                              <tr class="info"  >
                                  <td><input  name="itemname[]" v-model="itemname" class="form-control input is-success itemname" type="text"></td>
-                                 <td><input  name="item[]" v-model="count"  class="form-control input is-success item" type="text"></td>
+                                 <td><input  name="quantity[]" v-model="count"  class="form-control input is-success item" type="text"></td>
                                 <td><input   name="price[]" v-model="price"  class="form-control input is-success price" type="text"></td>
-                                <td><input    v-model="amounts" class="form-control input is-success total" type="text" value="@{{ count * price }}"  disabled></td>
+                                <td><input   name="item_total[]" v-model="amounts" class="form-control input is-success total" type="text" value="@{{ count * price }}" ></td>
                                 <td></td>
                             </tr>
                             
                            
                                <tr v-for="(key,item) in list"  style="margin-bottom: 5px;" class="info" v-show="liststatus"  >                          
                                  <td><input name="itemname[]" v-model="item.itemname"    class="form-control input is-success itemname" type="text"></td>
-                                 <td><input name="item[]" v-model="item.count"  class="form-control input is-success item" type="text"></td>
+                                 <td><input name="quantity[]" v-model="item.count"  class="form-control input is-success item" type="text"></td>
                                 <td><input  name="price[]"  v-model="item.price"   class="form-control input is-success price" type="text"></td>
-                                <td><input   v-model="item.amount" class="form-control input is-success total"  value="@{{ item.count * item.price }}" type="text" disabled></td>
+                                <td><input  name="item_total[]" v-model="item.amount" class="form-control input is-success total"  value="@{{ item.count * item.price }}" type="text" ></td>
                                 <td @click="removeElement"><i id="trash" class="fa fa-trash-o" aria-hidden="true"></i></td>
                           
                                </tr>
@@ -58,15 +58,15 @@
                           <table class="table">
                             <tr class="info">
                                  <td>Sub Total</td> 
-                                 <td><input name="" v-model="subtotal + (count * price )" class="form-control input is-primary" type="text" valeu="@{{ subtotal + (count * price)}}" disabled></td>
+                                 <td><input name="subtotal" v-model="subtotal + (count * price )" class="form-control input is-primary" type="text" valeu="@{{ subtotal + (count * price)}}" ></td>
                             </tr>
                             <tr class="info">
                                  <td>Tax</td> 
-                                 <td><input  name="" v-model="tax" type="text" class="form-control input is-primary"></td>
+                                 <td><input  name="tax" v-model="tax" type="text" class="form-control input is-primary"></td>
                             </tr>
                              <tr class="info">
                                  <td>Total</td> 
-                                 <td><input name="" v-model="subtotal+(count*price)+((subtotal/100)*tax) + (((count * price)/100)*tax)" value="@{{subtotal+(count*price)+((subtotal/100)*tax) + (((count * price)/100)*tax)}}" class="t form-control input is-primary" type="text"  v-text="total" disabled></p></td>
+                                 <td><input name="total" v-model="subtotal+(count*price)+((subtotal/100)*tax) + (((count * price)/100)*tax)" value="@{{subtotal+(count*price)+((subtotal/100)*tax) + (((count * price)/100)*tax)}}" class="t form-control input is-primary" type="text"  v-text="total" disabled></p></td>
                                 <input type="hidden" v-model="subtotal+(count*price)+((subtotal/100)*tax) + (((count * price)/100)*tax)"  name="total" >
                             </tr>
                           </table>           

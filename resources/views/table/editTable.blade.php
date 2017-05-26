@@ -11,9 +11,9 @@
                     <p class="alert alert-success">{{session('success')}}</p>
                  @endif()
       <legend>New Invoice</legend>
- </div>    
-         
+ </div>
             <form method="POST" id='formtablex'>
+                <input type="hidden" name="_method" value="PUT">             
                 {{csrf_field()}}
                  <div class="form-inline">
                      <div class="form-group">
@@ -35,20 +35,23 @@
                             <tbody class="detailbutton">
                            
                     <?php 
-                            $item_name=unserialize($ed->item_name);
-                            $count_item=unserialize($ed->count_item);
-                            $prices=unserialize($ed->price);  
-                            //var_dump($prices[]);exit;
-                            for($i=0;$i<count($item_name);$i++){
+                         $it=array();
+                          foreach($ed->items as $item){
+                              $count=unserialize($item->quantity);
+                              $item_name=unserialize($item->item_name);
+                              $price=unserialize($item->price);
+                              $item_total=unserialize($item->item_total);//var_dump(count($item)); 
+                         
+                               for($i=0;$i<count($item_name);$i++){
                     ?>
                                 <tr class="info">
                                     <td><input  name="itemname[]" value="{{$item_name[$i]}}" class="form-control  input is-success itemnamebutton" type="text"></td>
-                                    <td><input v-model="count[]" name="item[]" class="form-control  input is-success itembutton" value="{{$count_item[$i]}}" type="text"></td>
-                                    <td><input v-model="price[]"  name="price[]" class="form-control  input is-success pricebutton" value="{{$prices[$i]}}" type="text"></td>
-                                    <td><input v-model="totalone[]" class="form-control input is-success totalbutton"  type="text"  v-text="totalone" disabled></p></td>
-                                    <td @click="removeElement"><i id="trashbutton" class="fa fa-trash-o" aria-hidden="true"></i></td>
-                                </tr>
-                    <?php   } ?>
+                                    <td><input v-model="count[]" name="quantity[]" class="form-control  input is-success itembutton" value="{{$count[$i]}}" type="text"></td>
+                                    <td><input v-model="price[]"  name="price[]" class="form-control  input is-success pricebutton" value="{{$price[$i]}}" type="text"></td>
+                                    <td><input v-model="totalone[]" name="item_total[]" class="form-control input is-success totalbutton"  value="{{$item_total[$i]}}" type="text"  v-text="totalone"></p></td>
+                                    <td ><i id="trashbutton" class="fa fa-trash-o" aria-hidden="true"></i></td>
+                                </tr>                         
+                              <?php   }; }; ?>
                             </tbody>
                        </table>
                     </div>
@@ -60,19 +63,20 @@
                           <table class="table">
                             <tr class="warning">
                                  <td>Sub Total</td> 
-                                 <td><input v-model="subtotal" class="subtotalbutton form-control input is-primary" type="text" disabled></td>
+                                 <td><input name="subtotal" v-model="subtotal" class="subtotalbutton form-control input is-primary" type="text" value="{{$ed->subtotal}}"></td>
                             </tr>
-                             @endforeach() 
+                           
                             <tr class="warning">
                                  <td>Tax</td> 
-                                 <td><input @keyup="taxx" v-model="tax" type="text" class="form-control input is-primary taxbutton"></td>
+                                 <td><input name="tax" @keyup="taxx" v-model="tax" value="{{$ed->tax}}" type="text" class="form-control input is-primary taxbutton"></td>
                             </tr>
                              <tr class="warning">
                                  <td>Total</td> 
-                                 <td><input  class="form-control input is-primary tbutton " type="text"  disabled></td>
+                                 <td><input  name="total" class="form-control input is-primary tbutton " type="text" value="{{$ed->total}}"></td>
                              <input type="hidden"  name="total" class="ttbutton" >
                             </tr>
                           </table>
+                           @endforeach() 
                 </div>
                 </div>
                 
